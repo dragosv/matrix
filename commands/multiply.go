@@ -6,16 +6,18 @@ import (
 	"strconv"
 )
 
-func Multiply(records [][]int) (string, error) {
+//Multiply returns the product of the integers in the matrix.
+//Will return multiply overflow if the multiplication overflows.
+func Multiply(matrix [][]int) (string, error) {
 	var total int
 
-	if len(records) > 0 {
+	if len(matrix) > 0 {
 		total = 1
 	}
 
 	var ok bool
-	for _, record := range records {
-		for _, value := range record {
+	for _, row := range matrix {
+		for _, value := range row {
 			total, ok = overflow.Mul(total, value)
 
 			if !ok {

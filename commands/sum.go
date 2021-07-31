@@ -6,12 +6,14 @@ import (
 	"strconv"
 )
 
-func Sum(records [][]int) (string, error) {
+//Sum returns the sum of the integers in the matrix.
+//Will return sum overflow error if the addition overflows.
+func Sum(matrix [][]int) (string, error) {
 	var total int
 
 	var ok bool
-	for _, record := range records {
-		for _, value := range record {
+	for _, row := range matrix {
+		for _, value := range row {
 			total, ok = overflow.Add(total, value)
 
 			if !ok {

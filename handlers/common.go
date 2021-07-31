@@ -11,6 +11,11 @@ func retrieveFile(r *http.Request) (multipart.File, error) {
 	return file, err
 }
 
-func writeError(w http.ResponseWriter, err error) (int, error) {
+func writeBadRequestError(w http.ResponseWriter, err error) (int, error) {
+	return writeError(w, err, http.StatusBadRequest)
+}
+
+func writeError(w http.ResponseWriter, err error, statusCode int) (int, error) {
+	w.WriteHeader(statusCode)
 	return w.Write([]byte(fmt.Sprintf("error %s", err.Error())))
 }

@@ -7,7 +7,8 @@ import (
 	"strconv"
 )
 
-func Records(file io.Reader) ([][]int, error) {
+//Matrix returns the file as an integer matrix.
+func Matrix(file io.Reader) ([][]int, error) {
 	records, err := csv.NewReader(file).ReadAll()
 	if err != nil {
 		return nil, errors.New("could not read the file")

@@ -1,16 +1,17 @@
 package commands
 
-func Invert(records [][]int) (string, error) {
+//Invert returns the matrix as a string in matrix format where the columns and rows are inverted
+func Invert(matrix [][]int) (string, error) {
 	var invertedRecords [][]int
 
-	invertedRecords = make([][]int, len(records))
+	invertedRecords = make([][]int, len(matrix))
 
-	for i := range records {
-		invertedRecords[i] = make([]int, len(records))
+	for i := range matrix {
+		invertedRecords[i] = make([]int, len(matrix))
 	}
 
-	for i, record := range records {
-		for j, value := range record {
+	for i, row := range matrix {
+		for j, value := range row {
 			invertedRecords[j][i] = value
 		}
 	}

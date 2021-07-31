@@ -6,19 +6,20 @@ import (
 	"strings"
 )
 
-func Echo(records [][]int) (string, error) {
+//Echo returns the matrix as a string in matrix format.
+func Echo(matrix [][]int) (string, error) {
 	var buffer bytes.Buffer
 
-	for i, record := range records {
+	for i, row := range matrix {
 		if i > 0 {
 			buffer.WriteString("\n")
 		}
 
 		var stringValues []string
 
-		stringValues = make([]string, len(record))
+		stringValues = make([]string, len(row))
 
-		for j, value := range record {
+		for j, value := range row {
 			stringValue := strconv.Itoa(value)
 			stringValues[j] = stringValue
 		}

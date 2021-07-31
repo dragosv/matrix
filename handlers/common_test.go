@@ -8,7 +8,14 @@ import (
 	"testing"
 )
 
-func createRequest(t *testing.T, body string) *http.Request {
+func createRequest(t *testing.T, url string) *http.Request {
+	request, err := http.NewRequest(http.MethodPost, url, nil)
+	assert.NoError(t, err)
+
+	return request
+}
+
+func createFileRequest(t *testing.T, url string, body string) *http.Request {
 	buffer := new(bytes.Buffer)
 	writer := multipart.NewWriter(buffer)
 	formFile, err := writer.CreateFormFile("file", "/path/matrix.csv")
@@ -20,7 +27,7 @@ func createRequest(t *testing.T, body string) *http.Request {
 	assert.NoError(t, err)
 	assert.NoError(t, writer.Close())
 
-	request, err := http.NewRequest(http.MethodPost, "/echo", buffer)
+	request, err := http.NewRequest(http.MethodPost, url, buffer)
 	assert.NoError(t, err)
 
 	request.Header.Set("Content-type", writer.FormDataContentType())

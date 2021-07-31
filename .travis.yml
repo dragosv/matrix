@@ -60,8 +60,7 @@ script:
   - go mod download
   - go mod verify
   - go build
-  - cd commands
-  - go test -coverprofile=coverage.txt -covermode=atomic
+  - go test ./... -coverprofile=coverage.txt -covermode=atomic
   - go tool cover -func=coverage.txt
 
 after_success:
