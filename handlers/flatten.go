@@ -7,7 +7,15 @@ import (
 	"net/http"
 )
 
-//FlattenHandler processes the '/flatten' endpoint
+//FlattenHandler handler
+// @Summary Matrix flatten
+// @Description Returns the matrix as a 1 line string, with values separated by commas.
+// @Tags matrix
+// @Accept  mpfd
+// @Produce  html
+// @Success 200 {object} string
+// @Failure 400 {object} string
+// @Router /flatten [post]
 func FlattenHandler(w http.ResponseWriter, r *http.Request) {
 	file, err := retrieveFile(r)
 	if err != nil {

@@ -1,0 +1,110 @@
+host: localhost:8080
+info:
+  contact:
+    name: Dragos Varovici
+    url: https://github.com/dragosv
+  description: Basic web server written in GoLang that performs operations on a matrix.
+  license:
+    name: Mozilla Public License 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+  title: Matrix web server API
+  version: "1.0"
+paths:
+  /echo:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Returns the matrix as a string in matrix format
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Matrix echo
+      tags:
+      - matrix
+  /flatten:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Returns the matrix as a 1 line string, with values separated by
+        commas.
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Matrix flatten
+      tags:
+      - matrix
+  /invert:
+    post:
+      consumes:
+      - multipart/form-data
+      description: returns the matrix as a string in matrix format where the columns
+        and rows are inverted.
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Matrix invert
+      tags:
+      - matrix
+  /multiply:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Returns the product of the integers in the matrix.
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Matrix multiply
+      tags:
+      - matrix
+  /sum:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Returns the sum of the integers in the matrix.
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Matrix sum
+      tags:
+      - matrix
+swagger: "2.0"

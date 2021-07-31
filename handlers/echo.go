@@ -7,7 +7,15 @@ import (
 	"net/http"
 )
 
-//EchoHandler processes the '/echo' endpoint
+//EchoHandler handler
+// @Summary Matrix echo
+// @Description Returns the matrix as a string in matrix format
+// @Tags matrix
+// @Accept  mpfd
+// @Produce  html
+// @Success 200 {object} string
+// @Failure 400 {object} string
+// @Router /echo [post]
 func EchoHandler(w http.ResponseWriter, r *http.Request) {
 	file, err := retrieveFile(r)
 	if err != nil {

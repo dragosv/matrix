@@ -7,7 +7,15 @@ import (
 	"net/http"
 )
 
-//SumHandler processes the '/sum' endpoint
+//SumHandler handler
+// @Summary Matrix sum
+// @Description Returns the sum of the integers in the matrix.
+// @Tags matrix
+// @Accept  mpfd
+// @Produce  html
+// @Success 200 {object} string
+// @Failure 400 {object} string
+// @Router /sum [post]
 func SumHandler(w http.ResponseWriter, r *http.Request) {
 	file, err := retrieveFile(r)
 	if err != nil {

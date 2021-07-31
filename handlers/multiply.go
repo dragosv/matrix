@@ -7,7 +7,15 @@ import (
 	"net/http"
 )
 
-//MultiplyHandler processes the '/multiply' endpoint
+//MultiplyHandler handler
+// @Summary Matrix multiply
+// @Description Returns the product of the integers in the matrix.
+// @Tags matrix
+// @Accept  mpfd
+// @Produce  html
+// @Success 200 {object} string
+// @Failure 400 {object} string
+// @Router /multiply [post]
 func MultiplyHandler(w http.ResponseWriter, r *http.Request) {
 	file, err := retrieveFile(r)
 	if err != nil {
