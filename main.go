@@ -22,6 +22,7 @@ func main() {
 
 	handlers.SetupMatrixHandlers(router)
 
+	// Swagger documentation http://localhost:8080/swagger/index.html
 	// use ginSwagger middleware to serve the API docs
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 

@@ -13,6 +13,7 @@ import (
 // @Tags matrix
 // @Accept  mpfd
 // @Produce  html
+// @Param file formData file true "csv file"
 // @Success 200 {object} string
 // @Failure 400 {object} string
 // @Router /flatten [post]

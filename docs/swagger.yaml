@@ -16,6 +16,12 @@ paths:
       consumes:
       - multipart/form-data
       description: Returns the matrix as a string in matrix format
+      parameters:
+      - description: csv file
+        in: formData
+        name: file
+        required: true
+        type: file
       produces:
       - text/html
       responses:
@@ -36,6 +42,12 @@ paths:
       - multipart/form-data
       description: Returns the matrix as a 1 line string, with values separated by
         commas.
+      parameters:
+      - description: csv file
+        in: formData
+        name: file
+        required: true
+        type: file
       produces:
       - text/html
       responses:
@@ -56,6 +68,12 @@ paths:
       - multipart/form-data
       description: returns the matrix as a string in matrix format where the columns
         and rows are inverted.
+      parameters:
+      - description: csv file
+        in: formData
+        name: file
+        required: true
+        type: file
       produces:
       - text/html
       responses:
@@ -75,6 +93,12 @@ paths:
       consumes:
       - multipart/form-data
       description: Returns the product of the integers in the matrix.
+      parameters:
+      - description: csv file
+        in: formData
+        name: file
+        required: true
+        type: file
       produces:
       - text/html
       responses:
@@ -94,6 +118,12 @@ paths:
       consumes:
       - multipart/form-data
       description: Returns the sum of the integers in the matrix.
+      parameters:
+      - description: csv file
+        in: formData
+        name: file
+        required: true
+        type: file
       produces:
       - text/html
       responses:

@@ -44,6 +44,15 @@ var doc = `{
                     "matrix"
                 ],
                 "summary": "Matrix echo",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "csv file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -73,6 +82,15 @@ var doc = `{
                     "matrix"
                 ],
                 "summary": "Matrix flatten",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "csv file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -102,6 +120,15 @@ var doc = `{
                     "matrix"
                 ],
                 "summary": "Matrix invert",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "csv file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -131,6 +158,15 @@ var doc = `{
                     "matrix"
                 ],
                 "summary": "Matrix multiply",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "csv file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -160,6 +196,15 @@ var doc = `{
                     "matrix"
                 ],
                 "summary": "Matrix sum",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "csv file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
