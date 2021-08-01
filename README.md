@@ -18,6 +18,7 @@ go run .
 ``` 
 
 ## Api
+The description of the API can be accessed while the server is running at http://localhost:8080/swagger/index.html
 
 ### Echo 
 Return the matrix as a string in matrix format.

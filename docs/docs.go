@@ -192,7 +192,7 @@ type swaggerInfo struct {
 var SwaggerInfo = swaggerInfo{
 	Version:     "1.0",
 	Host:        "localhost:8080",
-	BasePath:    "",
+	BasePath:    "/",
 	Schemes:     []string{},
 	Title:       "Matrix web server API",
 	Description: "Basic web server written in GoLang that performs operations on a matrix.",
