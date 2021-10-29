@@ -2,6 +2,12 @@ language: go
 
 dist: focal
 
+addons:
+  sonarcloud:
+    organization: "sonarcloud"
+    token:
+      secure: "NsV4wkCqio4gwtrNZaWVnNKYpndn2HzCkROlYG97NoQHBRKAUx4W7WzfnrtltGbBZKq53I4Zk+6aVZyXIv/HMWA6MgI5UMdnDOB2pgaz/Mbry+E1iYvtwYjIFlOB942XE9AOHpnXcJ3TlKOVc9CMwXOVmcVC6vj950TRa5yLuMI0xiKWW/e/iSIJcDXnXmciKFoPD9fDIQLzTJw7NZsgflQ9hggz/HrjVQUFZnz4Dmm45YLNgDt0bI1ulK2Q23ql3mvA4sbn0JmQNzmxBLCyz9MFClj+i9XfSXNJFMwdiDb+7e51MrLnwCxQsd1iJqVC/z2hzsHmWpfK6L+S10l78d6B2DJ2k9VciBfNa8YOU0rD7rKz+0/YaNB0zkNJRPOzuFR2/txpquRXrJOJTi5s63CMF1bePPBJjUX085cgcVj6SrZ7s+UlpKk8W5xEUivZcmINMee6cveLWs81CRf+Kntb97xlDdiDJI9amamUQgH/JBAUlu3Ta3jXByGMzO0sdjAwtp95q/68Z8a3JgwGesBfVZPt3YYhHgEeUZlppKNWWxX6p+/7nXUaLh1Oc3o++5sWQ1RrdZqEseRUrkxfIQxOekWd2nvpQMcmKEbmvLiE8Eaj3M95WUceucK4NJC3aq3DhIIjMswd6rTXF3qlcjjBkMLYc4+2+p63O7RK8FA="
+
 env:
   global:
     - CACHE_NAME=${TRAVIS_ARCH}
@@ -42,6 +48,7 @@ cache:
     - $HOME/.cache/go-build
     - $HOME/Library/Caches/go-build
     - $HOME/AppData/Local/go-build
+    - $HOME/.sonar/cache
 
 before_install:
   # https://travis-ci.community/t/go-cant-find-gcc-with-go1-11-1-on-windows/293/5
@@ -55,6 +62,7 @@ install:
   - mv $TRAVIS_BUILD_DIR $HOME/src
   - export TRAVIS_BUILD_DIR=$HOME/src/matrix
   - cd $HOME/src/matrix
+  - go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.1
 
 script:
   - go mod download
@@ -62,6 +70,10 @@ script:
   - go build
   - go test ./... -coverprofile=coverage.txt -covermode=atomic
   - go tool cover -func=coverage.txt
+  - cp coverage.txt coverage.out
+  - golangci-lint run > golangci-lint-report.out || true
+   # And then execute SonarCloud analysis which will run its own code analysis, and also reuse the linters' results
+  - sonar-scanner
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
