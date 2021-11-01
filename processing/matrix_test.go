@@ -12,7 +12,9 @@ func TestMatrix_WithValidData_ShouldOutputExpected(t *testing.T) {
 
 	reader := createReader(body)
 
-	matrix, err := Matrix(reader)
+	m := Matrix{}
+
+	matrix, err := m.Read(reader)
 	assert.Nil(t, err)
 
 	assert.Equal(t, 1, matrix[0][0])
@@ -26,7 +28,9 @@ func TestMatrix_WithNonNumbers_ShouldOutputError(t *testing.T) {
 
 	reader := createReader(body)
 
-	_, err := Matrix(reader)
+	m := Matrix{}
+
+	_, err := m.Read(reader)
 	assert.NotNil(t, err)
 	assert.Equal(t, "all values should be numbers", err.Error())
 }
@@ -36,7 +40,9 @@ func TestMatrix_WithNonCsv_ShouldOutputError(t *testing.T) {
 
 	reader := createReader(body)
 
-	_, err := Matrix(reader)
+	m := Matrix{}
+
+	_, err := m.Read(reader)
 	assert.NotNil(t, err)
 	assert.Equal(t, "could not read the file", err.Error())
 }
@@ -46,7 +52,9 @@ func TestMatrix_WithNonMatrix_ShouldOutputError(t *testing.T) {
 
 	reader := createReader(body)
 
-	_, err := Matrix(reader)
+	m := Matrix{}
+
+	_, err := m.Read(reader)
 	assert.NotNil(t, err)
 	assert.Equal(t, "the number of columns and rows should be the same", err.Error())
 }
