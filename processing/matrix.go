@@ -7,8 +7,15 @@ import (
 	"strconv"
 )
 
-//Matrix returns the file as an integer matrix.
-func Matrix(file io.Reader) ([][]int, error) {
+type Matrix struct {
+}
+
+type MatrixReader interface {
+	Read(file io.Reader) ([][]int, error)
+}
+
+//Read returns the file as an integer matrix.
+func (_ *Matrix) Read(file io.Reader) ([][]int, error) {
 	records, err := csv.NewReader(file).ReadAll()
 	if err != nil {
 		return nil, errors.New("could not read the file")

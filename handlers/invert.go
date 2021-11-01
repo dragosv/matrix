@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"github.com/dragosv/matrix/commands"
 	"github.com/dragosv/matrix/processing"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -17,7 +16,7 @@ import (
 // @Success 200 {object} string
 // @Failure 400 {object} string
 // @Router /invert [post]
-func InvertHandler(c *gin.Context) {
+func (m *MatrixController) InvertHandler(c *gin.Context) {
 	file, err := retrieveFile(c.Request)
 	if err != nil {
 		writeBadRequestError(c.Writer, err)
@@ -25,13 +24,13 @@ func InvertHandler(c *gin.Context) {
 	}
 	defer file.Close()
 
-	matrix, err := processing.Matrix(file)
+	matrix, err := m.reader.Read(file)
 	if err != nil {
 		writeBadRequestError(c.Writer, err)
 		return
 	}
 
-	response, err := commands.Invert(matrix)
+	response, err := m.operations.Invert(matrix)
 	if err != nil {
 		writeBadRequestError(c.Writer, err)
 		return

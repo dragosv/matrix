@@ -9,7 +9,9 @@ import (
 func TestMultiply_Empty_ShouldOutputExpected(t *testing.T) {
 	var records [][]int
 
-	outputText, err := Multiply(records)
+	matrix := Matrix{}
+
+	outputText, err := matrix.Multiply(records)
 
 	assert.Nil(t, err)
 	assert.Equal(t, "0", outputText)
@@ -23,7 +25,9 @@ func TestMultiply_NonEmpty_ShouldOutputExpected(t *testing.T) {
 		{13, 14, 15, 16},
 	}
 
-	outputText, err := Multiply(records)
+	matrix := Matrix{}
+
+	outputText, err := matrix.Multiply(records)
 
 	assert.Nil(t, err)
 	assert.Equal(t, "20922789888000", outputText)
@@ -35,7 +39,9 @@ func TestMultiply_AboveMaxInt_ShouldOverflow(t *testing.T) {
 		{1, 1},
 	}
 
-	_, err := Multiply(records)
+	matrix := Matrix{}
+
+	_, err := matrix.Multiply(records)
 
 	assert.NotNil(t, err)
 	assert.Equal(t, "multiply overflow", err.Error())

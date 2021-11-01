@@ -8,7 +8,7 @@ import (
 
 //Sum returns the sum of the integers in the matrix.
 //Will return sum overflow error if the addition overflows.
-func Sum(matrix [][]int) (string, error) {
+func (_ *Matrix) Sum(matrix [][]int) (string, error) {
 	var total int
 
 	var ok bool

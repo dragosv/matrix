@@ -7,7 +7,7 @@ import (
 )
 
 //Echo returns the matrix as a string in matrix format.
-func Echo(matrix [][]int) (string, error) {
+func (_ *Matrix) Echo(matrix [][]int) (string, error) {
 	var buffer bytes.Buffer
 
 	for i, row := range matrix {

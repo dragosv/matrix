@@ -9,7 +9,9 @@ import (
 func TestSum_Empty_ShouldOutputExpected(t *testing.T) {
 	var records [][]int
 
-	outputText, err := Sum(records)
+	matrix := Matrix{}
+
+	outputText, err := matrix.Sum(records)
 
 	assert.Nil(t, err)
 	assert.Equal(t, "0", outputText)
@@ -23,7 +25,9 @@ func TestSum_Standard_ShouldOutputExpected(t *testing.T) {
 		{13, 14, 15, 16},
 	}
 
-	outputText, err := Sum(records)
+	matrix := Matrix{}
+
+	outputText, err := matrix.Sum(records)
 
 	assert.Nil(t, err)
 	assert.Equal(t, "136", outputText)
@@ -35,7 +39,9 @@ func TestSum_AboveMaxInt_ShouldOverflow(t *testing.T) {
 		{1, 1},
 	}
 
-	_, err := Sum(records)
+	matrix := Matrix{}
+
+	_, err := matrix.Sum(records)
 
 	assert.NotNil(t, err)
 	assert.Equal(t, "sum overflow", err.Error())

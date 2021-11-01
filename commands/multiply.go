@@ -8,7 +8,7 @@ import (
 
 //Multiply returns the product of the integers in the matrix.
 //Will return multiply overflow if the multiplication overflows.
-func Multiply(matrix [][]int) (string, error) {
+func (_ *Matrix) Multiply(matrix [][]int) (string, error) {
 	var total int
 
 	if len(matrix) > 0 {

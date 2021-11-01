@@ -1,7 +1,7 @@
 package commands
 
 //Invert returns the matrix as a string in matrix format where the columns and rows are inverted
-func Invert(matrix [][]int) (string, error) {
+func (m *Matrix) Invert(matrix [][]int) (string, error) {
 	var invertedRecords [][]int
 
 	invertedRecords = make([][]int, len(matrix))
@@ -16,5 +16,5 @@ func Invert(matrix [][]int) (string, error) {
 		}
 	}
 
-	return Echo(invertedRecords)
+	return m.Echo(invertedRecords)
 }

@@ -6,7 +6,7 @@ import (
 )
 
 //Flatten returns the matrix as a 1 line string, with values separated by commas.
-func Flatten(matrix [][]int) (string, error) {
+func (_ *Matrix) Flatten(matrix [][]int) (string, error) {
 	var lines []string
 
 	lines = make([]string, len(matrix))
