@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"github.com/dragosv/matrix/processing"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
