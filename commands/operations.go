@@ -9,4 +9,5 @@ type MatrixOperations interface {
 	Invert(matrix [][]int) (string, error)
 	Multiply(matrix [][]int) (string, error)
 	Sum(matrix [][]int) (string, error)
+	New(matrix [][]int) (string, error)
 }
