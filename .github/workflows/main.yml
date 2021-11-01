@@ -25,7 +25,9 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
 
-      - run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.1
+      - name: Setup Go Linter
+        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.1
+
       - run: go mod download
       - run: go mod verify
       - run: go build
