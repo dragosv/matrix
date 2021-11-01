@@ -18,11 +18,11 @@ go:
 - master
 arch:
 - amd64
-- arm64
+#- arm64
 os:
 - linux
-- osx
-- windows
+#- osx
+#- windows
 jobs:
   allow_failures:
   - go: master
