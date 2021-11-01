@@ -12,4 +12,5 @@ func SetupMatrixHandlers(router *gin.Engine) {
 	router.POST("/flatten", controller.FlattenHandler)
 	router.POST("/sum", controller.SumHandler)
 	router.POST("/multiply", controller.MultiplyHandler)
+	router.POST("/new", controller.NewHandler)
 }
