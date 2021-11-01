@@ -1,6 +1,10 @@
 image:
   - Ubuntu
 
+branches:
+  only:
+    - master
+
 clone_folder: /usr/go/src/github.com/dragosv/matrix
 
 environment:
@@ -8,10 +12,10 @@ environment:
 
 stack: go 1.16
 
-build:
-  - run: go mod download
-  - run: go mod verify
-  - run: go build
+build_script:
+  - go mod download
+  - go mod verify
+  - go build
 
 test_script:
   - go test ./...
