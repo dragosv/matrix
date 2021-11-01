@@ -1,0 +1,46 @@
+on:
+  # Trigger analysis when pushing in master or pull requests, and when creating
+  # a pull request.
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+name: Sonarcloud Workflow
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go: [ '1.16' ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+
+      - run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.1
+      - run: go mod download
+      - run: go mod verify
+      - run: go build
+      - run: go test ./... -coverprofile=coverage.txt -covermode=atomic
+      - run: go tool cover -func=coverage.txt
+      - run: cp coverage.txt coverage.out
+      - run: golangci-lint run > golangci-lint-report.out || true
+
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: codecov/codecov-action@v2
+        with:
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
