@@ -8,11 +8,11 @@ environment:
 
 stack: go 1.16
 
-before_test:
-  - cover -delete
+build:
+  - run: go mod download
+  - run: go mod verify
+  - run: go build
 
 test_script:
   - go test ./...
 
-after_test:
-  - cmd: cover -report codecov
