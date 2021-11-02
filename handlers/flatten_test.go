@@ -21,7 +21,7 @@ func TestFlatten_WithoutFile_ShouldOutputError(t *testing.T) {
 
 	responseBody, code := matrixRequest(t, url)
 
-	assert.Equal(t, "error missing form body", responseBody)
+	assert.Equal(t, "error request Content-Type isn't multipart/form-data", responseBody)
 	assert.Equal(t, http.StatusBadRequest, code)
 }
 
