@@ -10,7 +10,7 @@ clone_folder: /usr/go/src/github.com/dragosv/matrix
 environment:
   GOPATH: /usr/go/
 
-stack: go 1.16
+stack: go 1.17
 
 build_script:
   - go mod download
