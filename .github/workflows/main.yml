@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go: [ '1.16' ]
+        go: [ '1.17' ]
     steps:
       - uses: actions/checkout@v2
         with:
@@ -26,15 +26,15 @@ jobs:
           go-version: ${{ matrix.go }}
 
       - name: Setup Go Linter
-        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.42.1
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
       - run: go mod download
       - run: go mod verify
       - run: go build
-      - run: go test ./... -coverprofile=coverage.txt -covermode=atomic
-      - run: go tool cover -func=coverage.txt
-      - run: cp coverage.txt coverage.out
-      - run: golangci-lint run > golangci-lint-report.out || true
+      - run: go test ./... -coverprofile=coverage.out -covermode=atomic
+      - run: go tool cover -func=coverage.out
+      - run: go vet ./...
+      - run: staticcheck ./... > linter.out || true
 
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
