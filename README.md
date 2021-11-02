@@ -1,7 +1,6 @@
 # Matrix
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#wip) 
-[![Travis Build Status](https://travis-ci.com/dragosv/matrix.svg?branch=master)](https://travis-ci.com/dragosv/matrix)
 [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/fpupql9ui12h73bt?svg=true)](https://ci.appveyor.com/project/dragosv/matrix)
 [![codecov](https://codecov.io/gh/dragosv/matrix/branch/master/graph/badge.svg)](https://codecov.io/gh/dragosv/matrix)
 [![Go Report Card](https://goreportcard.com/badge/github.com/dragosv/matrix)](https://goreportcard.com/report/github.com/dragosv/matrix)
