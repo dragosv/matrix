@@ -1,0 +1,51 @@
+on:
+  # Trigger analysis when pushing in master or pull requests, and when creating
+  # a pull request.
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+name: Coverage Workflow
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go: [ '1.17' ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+
+      - name: Checkout cover-checker repo
+        uses: actions/checkout@v2
+        with:
+          repository: naver/cover-checker
+          path: cover-checker    
+          fetch-depth: 0      
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Build cover-checker
+        run: ./cover-checker/gradlew clean build jar
+
+      - name: Setup Go Cobertura formatter
+        run: go install boumenot/gocover-cobertura@latest
+
+      - run: go mod download
+      - run: go mod verify
+      - run: go build
+      - run: go test ./... -coverprofile=coverage.out -covermode=atomic
+      - run: go tool cover -func=coverage.out
+      - run: gocover-cobertura < coverage.out > coverage.xml
+      - run: java -jar ./cover-checker-console/build/libs/cover-checker-1.5.0-all.jar --cover coverage.xml --threshold 80 -type cobertura
+
+
