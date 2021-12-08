@@ -12,11 +12,6 @@ jobs:
       matrix:
         go: [ '1.17' ]
     steps:
-      - uses: actions/checkout@v2
-        with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting
-          fetch-depth: 0
-
       - name: Checkout cover-checker repo
         uses: actions/checkout@v2
         with:
@@ -24,18 +19,24 @@ jobs:
           path: cover-checker    
           fetch-depth: 0      
 
-      - name: Setup Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: ${{ matrix.go }}
-
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
 
       - name: Build cover-checker
-        run: ./cover-checker/gradlew clean build jar
+        run: ./gradlew clean build jar    
+        working-directory: cover-checker      
+
+      - uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
 
       - name: Setup Go Cobertura formatter
         run: go install boumenot/gocover-cobertura@latest
