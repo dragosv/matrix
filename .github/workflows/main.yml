@@ -28,15 +28,25 @@ jobs:
       - name: Setup Go Linter
         run: go install honnef.co/go/tools/cmd/staticcheck@latest
 
+      - name: Setup Go LCOV coverage formatter
+        run: go install github.com/jandelgado/gcov2lcov@latest    
+
       - run: go mod download
       - run: go mod verify
       - run: go build
       - run: go test ./... -coverprofile=coverage.out -covermode=atomic
       - run: go tool cover -func=coverage.out
+      - run: gcov2lcov -infile=coverage.out -outfile=coverage.lcov
       - run: go vet ./...
       - run: staticcheck ./... > linter.out || true
       - run: staticcheck -f sarif ./... > linter.sarif || true
-      
+ 
+      - name: Upload coverage to Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage.lcov
+
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v1
         with:
