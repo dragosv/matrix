@@ -47,6 +47,6 @@ jobs:
       - run: go test ./... -coverprofile=coverage.out -covermode=atomic
       - run: go tool cover -func=coverage.out
       - run: gocover-cobertura < coverage.out > coverage.xml
-      - run: java -jar ./cover-checker-console/build/libs/cover-checker-1.5.0-all.jar --cover coverage.xml --threshold 80 -type cobertura
+      - run: java -jar ./cover-checker/cover-checker-console/build/libs/cover-checker-1.5.0-all.jar --cover coverage.xml --threshold 80 -type cobertura
 
 
