@@ -24,6 +24,10 @@ jobs:
         with:
           java-version: 1.8
 
+      - name: List cover-checker folder
+        run: ls --all  
+        working-directory: $HOME/cover-checker      
+
       - name: Build cover-checker
         run: ./gradlew clean build jar    
         working-directory: $HOME/cover-checker 
@@ -34,10 +38,10 @@ jobs:
           fetch-depth: 0
 
       - name: List folder
-        run: ls          
+        run: ls --all         
 
       - name: List cover-checker folder
-        run: ls   
+        run: ls --all
         working-directory: $HOME/cover-checker        
 
       - name: Setup Go
