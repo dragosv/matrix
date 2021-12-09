@@ -39,7 +39,7 @@ jobs:
           go-version: ${{ matrix.go }}
 
       - name: Setup Go Cobertura formatter
-        run: go install boumenot/gocover-cobertura@latest
+        run: go install github.com/boumenot/gocover-cobertura@latest
 
       - run: go mod download
       - run: go mod verify
