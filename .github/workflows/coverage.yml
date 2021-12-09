@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: naver/cover-checker
-          path: cover-checker    
+          path: ./cover-checker
           fetch-depth: 0      
 
       - name: Set up JDK 1.8
@@ -26,7 +26,7 @@ jobs:
 
       - name: Build cover-checker
         run: ./gradlew clean build jar    
-        working-directory: cover-checker      
+        working-directory: ./cover-checker 
 
       - uses: actions/checkout@v2
         with:
@@ -48,5 +48,4 @@ jobs:
       - run: go tool cover -func=coverage.out
       - run: gocover-cobertura < coverage.out > coverage.xml
       - run: java -jar ./cover-checker/cover-checker-console/build/libs/cover-checker-1.5.0-all.jar --cover coverage.xml --threshold 80 -type cobertura
-
 
