@@ -28,10 +28,17 @@ jobs:
         run: ./gradlew clean build jar    
         working-directory: ./cover-checker 
 
+      - name: Show path
+        run: pwd   
+        working-directory: ./cover-checker 
+
       - uses: actions/checkout@v2
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
+
+      - name: List folder
+        run: ls          
 
       - name: Setup Go
         uses: actions/setup-go@v2
