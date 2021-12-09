@@ -40,12 +40,13 @@ jobs:
       - run: go vet ./...
       - run: staticcheck ./... > linter.out || true
       - run: staticcheck -f sarif ./... > linter.sarif || true
+      - run: ls
  
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ./coverage.lcov
+          path-to-lcov: coverage.lcov
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v1
