@@ -1,0 +1,60 @@
+on:
+  # Trigger analysis when pushing in master or pull requests, and when creating
+  # a pull request.
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+name: Coverage Workflow
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go: [ '1.17' ]
+    steps:
+      - name: Checkout cover-checker repo
+        uses: actions/checkout@v2
+        with:
+          repository: naver/cover-checker
+          path: cover-checker
+          fetch-depth: 0      
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Build cover-checker
+        run: ./gradlew clean build jar    
+        working-directory: cover-checker 
+
+      - name: Create cover-checker folder
+        run: mkdir $HOME/cover-checker
+
+      - run: cp ./cover-checker-console/build/libs/cover-checker-1.5.0-all.jar $HOME/cover-checker/cover-checker-all.jar
+        working-directory: cover-checker
+
+      - uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+
+      - name: List folder
+        run: ls --all         
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Setup Go Cobertura formatter
+        run: go install github.com/boumenot/gocover-cobertura@latest
+
+      - run: go mod download
+      - run: go mod verify
+      - run: go build
+      - run: go test ./... -coverprofile=coverage.out -covermode=atomic
+      - run: go tool cover -func=coverage.out
+      - run: gocover-cobertura < coverage.out > coverage.xml
+      - run: java -jar $HOME/cover-checker/cover-checker-all.jar --cover coverage.xml --threshold 80 -type cobertura
+
